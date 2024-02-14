@@ -1,4 +1,3 @@
-import { response } from 'express';
 import { useRef } from 'react';
 
 function FileStyle() {
@@ -18,7 +17,7 @@ function FileStyle() {
         const contents = event.target.result;
         content = contents;
 
-        let response = await fetch("locahost:3000", {
+        let response = await fetch("http://locahost:3000/api/generate", {
           method: "POST",
           headers: {
             'Accept': 'application/json',
@@ -26,9 +25,11 @@ function FileStyle() {
           }, 
           body: JSON.stringify({prompt: content})
         })
+
+        console.log(response);
+
       };
 
-      console.log(response);
 
 
       reader.readAsText(file); 
