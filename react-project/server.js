@@ -8,7 +8,7 @@ app.use(express.json());
 const openAIKey = process.env.API_KEY;
 
 app.post('/api/generate', async (req, res) => {
-  const prompt = req.body.prompt;
+  const prompt = JSON.parse(req.body.prompt);
   
   if (!prompt) {
     return res.status(400).send('Prompt is required');

@@ -1,3 +1,4 @@
+import { response } from 'express';
 import { useRef } from 'react';
 
 function FileStyle() {
@@ -7,17 +8,28 @@ function FileStyle() {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange =  (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       let content; 
-      reader.onload = (event) => {
+      reader.onload = async (event) => {
        
         const contents = event.target.result;
         content = contents;
-        console.log(content) 
+
+        let response = await fetch("locahost:3000", {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }, 
+          body: JSON.stringify({prompt: content})
+        })
       };
+
+      console.log(response);
+
 
       reader.readAsText(file); 
     }
