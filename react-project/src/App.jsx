@@ -1,10 +1,9 @@
-
-
+import FileSelector from "./components/FileSelector"
 function App() {
 
   return (
-    <>
-      
+    <> 
+      <FileSelector />
     </>
   )
 }
