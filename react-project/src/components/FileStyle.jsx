@@ -2,20 +2,29 @@ import { useRef } from 'react';
 
 function FileStyle() {
   const fileInputRef = useRef(null);
-
   const handleClick = () => {
+
     fileInputRef.current.click();
   };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      console.log('File selected:', file.name);
+      const reader = new FileReader();
+      let content; 
+      reader.onload = (event) => {
+       
+        const contents = event.target.result;
+        content = contents;
+        console.log(content) 
+      };
+
+      reader.readAsText(file); 
     }
   };
 
   return (
-    <div className="file-syle-container">
+    <div className="file-style-container">
       <div className="file-holder">
         <p>Text Analyzer</p>
       </div>
@@ -25,7 +34,8 @@ function FileStyle() {
           type="file"
           ref={fileInputRef}
           onChange={handleFileChange}
-          style={{display: 'none'}}
+          style={{ display: 'none' }}
+          accept=".txt" 
         />
       </div>
     </div>
