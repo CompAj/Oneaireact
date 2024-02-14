@@ -1,11 +1,11 @@
-require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
-const openAIKey = process.env.OPENAI_API_KEY;
+const openAIKey = process.env.API_KEY;
 
 app.post('/api/generate', async (req, res) => {
   const prompt = req.body.prompt;
@@ -16,7 +16,7 @@ app.post('/api/generate', async (req, res) => {
 
   try {
     const response = await axios.post('https://api.openai.com/v1/completions', {
-      model: 'text-davinci-003', // Adjust model as per requirement
+      model: 'gpt-3.5-turbo', // Adjust model as per requirement
       prompt: prompt,
       max_tokens: 100,
     }, {
